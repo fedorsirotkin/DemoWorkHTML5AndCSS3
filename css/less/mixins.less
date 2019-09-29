@@ -1,0 +1,274 @@
+// Общая библиотека для CSS-препроцессора LESS, позволяющая
+// - избавится от повторяющегося кода (цвета, размеры блоков, пути и т.п.);
+// - работать с иерархией стилей более наглядно.
+//
+// Автор Ф.А.Сироткин
+// 23 января 2017
+
+// Подключение конкретного шрифта
+.includeFont(@family: Arial, @weight: normal, @style: normal, @path: '/fonts/') {
+    @font-face {
+        font-family: @family;
+        src: url('@{path}@{family}.eot');
+        src: url('@{path}@{family}.woff') format('woff'), 
+            url('@{path}@{family}.ttf') format('truetype'), 
+            url('@{path}@{family}.svg') format('svg');
+        font-weight: @weight;
+        font-style: @style;
+    }
+}
+
+// Подключение множества шрифтов
+.includeFonts(@count: 1, @list...) {
+    .mixin-loop (@i) when (@i <= @count) {
+        @font: extract(@list, @i);
+        .includeFont(@font, @weightFonts, @styleFonts, @pathFonts);
+        .mixin-loop(@i + 1);
+    }
+    .mixin-loop(1);
+}
+
+// Получить % изображения спрайта по горизонтали
+.persentSpriteHorisontal(@count: 1, @list...) {
+    @step: 100% / ( @count - 1 );
+    .mixin-loop (@i, @persent, @step) when (@i <= @count) {
+        @lang: extract(@list, @i);
+        .@{lang}::before {
+            background-position: @persent 0;
+        }
+        .mixin-loop(@i + 1, @persent + @step,  @step );
+    }
+    .mixin-loop(1, 0, @step);
+}
+
+.persentCalc(@param, @allPersent) {
+    @result: @param * 100 / @allPersent;
+    width: @result;
+}
+
+.negative(@base, @m, @number) when (@number < 0) {
+    @number_abs: abs( @number );
+    font-size: ~'calc( @{base}rem + @{m}vw - @{number_abs}px )';
+}
+
+.positive(@base, @m, @number) when (@number > 0) {
+    font-size: ~'calc( @{base}rem + @{m}vw + @{number}px )';
+}
+
+// Вычисление линейной функции в заданных интервалах для шрифтов
+// @minSize, @maxSize, @minWidth, @maxWidth - px; @baseline - %
+.calcFontInterval(@minSize, @maxSize, @minWidth, @maxWidth, @baseline) {
+    @minSizeNum: unit(@minSize);
+    @maxSizeNum: unit(@maxSize); 
+    @minWidthNum: unit(@minWidth);
+    @maxWidthNum: unit(@maxWidth);
+    @baselineNum: unit(@baseline);
+    @base: @minSizeNum / ( @baselineNum / 6.25 );
+    @base_rem: @base;
+    @m: ( @maxSizeNum - @minSizeNum) / (@maxWidthNum - @minWidthNum );
+    @m_around: round( ( @m   * 100 ), 3);
+    @b: @minSizeNum - @m * @minWidthNum;
+    @b_around: round( ( @b ), 3);
+    @y1_around: round( ( @minSizeNum ), 3);
+    @right_part: @b_around - @y1_around;
+    .positive( @base_rem, @m_around, @right_part );
+    .negative( @base_rem, @m_around, @right_part );
+}
+
+
+// Очищение потока с сохранением структурной верстки (clearfix)
+.clearfix() {
+    .clearfix:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+// Polyfill styles, with support for cover/contain and 9 alignments
+.objectFitPolyfill() {
+    img[data-fit] {
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+    }
+
+    img[data-fit~="contain"] {
+        object-fit: contain;
+        background-size: contain;
+    }
+
+    img[data-fit~="cover"] {
+        object-fit: cover;
+        background-size: cover;
+    }
+
+    img[data-fit~="left"] {
+        object-position: left center;
+        background-position: left center;
+    }
+
+    img[data-fit~="right"] {
+        object-position: right center;
+        background-position: right center;
+    }
+
+    img[data-fit~="top"] {
+        object-position: center top;
+        background-position: center top;
+    }
+
+    img[data-fit~="bottom"] {
+        object-position: center bottom;
+        background-position: center bottom;
+    }
+
+    img[data-fit~="left"][data-fit~="top"] {
+        object-position: left top;
+        background-position: left top;
+    }
+
+    img[data-fit~="left"][data-fit~="bottom"] {
+        object-position: left bottom;
+        background-position: left bottom;
+    }
+
+    img[data-fit~="right"][data-fit~="top"] {
+        object-position: right top;
+        background-position: right top;
+    }
+
+    img[data-fit~="right"][data-fit~="bottom"] {
+        object-position: right bottom;
+        background-position: right bottom;
+    }
+}
+
+// Цвет ссылок по умолчанию
+.linkDefault(@color) {
+    a {
+        color: @color;
+    }
+}
+
+// Вставка параметров wrapper'а
+.settingsWrapper(@name: wrap) {
+    .@{name} {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+// Делает изображения адаптивными
+.responsiveImage() {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    flex: none;
+}
+
+// Делает изображения адаптивными без соотношения сторон
+.responsiveImageNotProportion() {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    flex: none;
+}
+
+// Убрать пунктирную обводку для ссылок
+.outlineDisabled() {
+    outline: medium none;
+}
+
+// Получить ссылку случайного изображения
+.getRandomImage(@servise, @width, @height, @more) {
+
+}
+
+// Абсолютное позиционирование по центру для горизонтали и вертикали
+.absolutePositionCenter() {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.absoluteAndMarginAuto() {
+    position: absolute;
+    margin: auto;
+}
+
+// Абсолютное позиционирование по верхнему краю
+.absoluteTop() {
+    top: 0;
+    bottom: auto;
+}
+
+// Абсолютное позиционирование по нижнему краю
+.absoluteBottom() {
+    top: auto;
+    bottom: 0;
+}
+
+// Абсолютное позиционирование по левому краю
+.absoluteLeft() {
+    left: 0;
+    right: auto;
+}
+
+// Абсолютное позиционирование по правому краю
+.absoluteRight() {
+    left: auto;
+    right: 0;
+}
+
+
+// НАЛОЖЕНИЕ СЛОЁВ
+.layerLevelAuto() {
+    z-index: auto; 
+}
+
+.layerLevel0() {
+    z-index: 0;
+}
+
+.layerLevel1() {
+    z-index: 10;
+}
+
+.layerLevel2() {
+    z-index: 20;
+}
+
+.layerLevel3() {
+    z-index: 30;
+}
+
+.layerLevel4() {
+    z-index: 40;
+}
+
+.layerLevel5() {
+    z-index: 50;
+}
+
+.layerLevel6() {
+    z-index: 60;
+}
+
+.layerLevel7() {
+    z-index: 70;
+}
+
+.layerLevel8() {
+    z-index: 80;
+}
+
+.layerLevel9() {
+    z-index: 90;
+}
+
+.layerLevel10() {
+    z-index: 100;
+}
+// ----- ----- -----

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+    <head>
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/script.js"></script>
+        <meta charset="UTF-8">
+        <title>Аудио | Дополнительно. Лабораторная работа №2</title>
+    </head>
+    <body class="bg-dark">
+        <div id="content" class="wrap">
+            <h1><span class="mainHeader">Аудио</span></h1>
+            <!-- 
+            controls - добавить элементы управления воспроизведением 
+            autoplay - начать воспроизведение после загрузки страницы
+            src - путь к файлу (не обязателен)
+            -->
+            <article class="audioBox">
+                <audio controls autoplay>
+                    <!-- Указание файлов, которые будут использоваться для воспроизведения браузером.
+                         Браузер начнет воспроизводить первый файл, формат которого поддерживает -->
+                    <source src="../audio/vivaldi.mp3">
+                    <source src="../audio/vivaldi.ogg">
+                    <a href="http://html5test.com/">Браузер не поддерживает воспроизведение звуковых медиафайлов</a>
+                </audio>
+            </article>
+            <p>Популярные мультимедиа контейнеры:</p>
+            <ul>
+                <li><strong>ААС </strong>&mdash; формат сжатия с потерями, дает более высокое качество чем MP3</li>
+                <li><strong>MP3</strong> &mdash; лицензируемый формат файла для хранения аудиоинформации</li>
+                <li><strong>OGG</strong> &mdash; открытый стандарт мультимедиа контейнера </li>
+                <li><strong>WAV</strong> &mdash; проприетарный аудиоформат без какого-либо сжатия;</li>
+                <li><strong>WEBM</strong> &mdash; открытый бесплатный медиаформат Google, основанный на аудиокодеке Vorbis</li>
+            </ul>
+            <aside>
+                <div><a href="../content.html" class="button-small">Перейти к содержанию</a></div>
+            </aside>
+        </div>
+        <footer>
+            <p>Нижний Новгород, 2017</p>
+        </footer>
+    </body>
+</html>

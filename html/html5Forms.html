@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+    <head>
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/script.js"></script>
+        <meta charset="UTF-8">
+        <title>HTML5 - Формы | Дополнительно. Лабораторная работа №2</title>
+    </head>
+    <body class="bg-dark">
+        <div class="wrap">
+            <h1><span class="mainHeader">Формы HTML5</span></h1>
+            
+            <form>
+                <fieldset>
+                    <legend>Личная информация </legend>
+                    <p>
+                        <label>
+                            Имя:<br>
+                            <!-- Однострочное поле ввода -->
+                            <input type="text" name="name" required="required" placeholder="Иванов Иван Иванович"></label>
+                    </p>
+                    <p>
+                        <label>
+                            Телефон:<br>
+                            <!-- Мобильный браузер будет отображать экранную клавиатуру с цифрами -->
+                            <input type="tel" name="phone" required="required" autofocus="autofocus" pattern="\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}" title="+7 (123) 123-12-12"  placeholder="+7 (123) 123-12-12"></label>
+                    </p>
+                    <p>
+                        <label>
+                            Адрес электронной почты:<br>
+                            <!-- Браузер проводит валидацию корректности введенного email адреса. 
+                            При работе в мобильном браузере будет отображаться специальная экранная клавиатура с символом @ и .com -->
+                            <input type="email" name="email" title="Формат данных неправильный"></label>
+                    </p>
+                    <p>
+                        <label>
+                            Дата рождения:<br>
+                            <!-- Элемент для выбора даты. Отобржает всплывающий календарь -->
+                            <input type="date" min="1917-01-01" max="2117-01-01" name="dob">
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            Ваш веб-сайт:<br>
+                            <!-- Браузер проводит валидацию корректности введенного адреса -->
+                            <input type="url" name="site" title="Абсолютный URL. Обязательно с протоколом HTTP" placeholder="http://ya.ru">
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            Код из цифр:<br>
+                            <!-- Элементы для работы с числами -->
+                            <!-- autocomplete="off" - атрибут используется для того, чтобы браузер не сохранял данные введенные в поле ввода, для обеспечения безопасности для критических данных.  -->
+                            <input type="number" name="site" min="2" max="20" step="2" title="Абсолютный URL. Обязательно с протоколом HTTP" placeholder="123" autocomplete="off">
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            Выбирите ваш любимый цвет:<br>
+                            <!-- Элемент для выбора цвета -->
+                            <input type="color" name="color">
+                        </label>
+                    </p>    
+                    <p>
+                        <label>
+                            Найти по запросу:<br>
+                            <!-- Элемент для типа search -->
+                            <input type="search" name="query" placeholder="Введите запрос">
+                        </label>
+                    </p>  
+
+
+                </fieldset>
+                <fieldset>
+                    <legend>Назначить прием</legend>
+                    <p>
+                        <!-- Элемент, который связанный с источником данных через атрибут list -->
+                        <label>Какова причина вашего визита?<br><input type="text" name="reason" list="reason" placeholder="Выберите..."></label>
+                        <!-- Источник данных -->
+                        <datalist id="reason">
+                            <option value="1">Плановый осмотр</option>
+                            <option value="2">Симптомы простуды или гpиппa</option>
+                            <option value="3">Анализ крови</option>
+                            <option value="4">Послеоперационный осмотр</option>
+                        </datalist>
+
+                    </p>
+                    <p>
+                        <label>
+                            Степень болевых ощущений:<br>
+                            <!-- Элемент типа интервал -->
+                            <input type="range" min="0" max="10" step="1" value="5" name="pain" title="0 - нет боли, 10 - боль нестерпима"></label>
+                    </p>
+                    <p>
+                        <label>
+                            Предпочтительная дата:<br>
+                            <!-- Элемент для выбора даты. Отобржает всплывающий календарь -->
+                            <input type="date" min="1917-01-01" max="2117-01-01" name="date"></label>
+                    </p>
+                    <p>
+                        <label>
+                            Предпочтительное время:<br>
+                            <!-- Элемент для выбора времени -->
+                            <input type="time" min="08:00" max="18:00" name="time"></label>
+                    </p>
+                </fieldset>
+                <p>
+                    <input type="submit" value="Отправить"><br><br>
+                </p>
+            </form>
+            <aside>
+                <div><a href="../content.html" class="button-small">Перейти к содержанию</a></div>
+            </aside>
+        </div>
+        <footer>
+            <p>Нижний Новгород, 2017</p>
+        </footer>
+    </body>
+</html>

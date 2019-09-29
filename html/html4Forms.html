@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html lang="ru-RU">
+    <head>
+        <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>HTML4 - Формы | Дополнительно. Лабораторная работа №1</title>
+    </head>
+    <body class="bg-dark">
+        <div class="wrap">
+            <h1><span class="mainHeader">Формы HTML4</span></h1>
+            <form action="/" method="get">
+                Имя:<br>
+                <!-- Однострочное поле ввода -->
+                <input type="text" name="firstname" value="" maxlength="12" size="40">
+                <br>
+                Фамилия:<br>
+                <!-- Однострочное поле ввода -->
+                <input type="text" name="lastname" value="" size="40">
+                <br>
+                <!-- Поле для ввода файла загружаймого на сервер, основное событие onchange -->
+                <input type="file" name="file1">
+                <br>
+                <!-- Переключатель -->
+                <label><input type="radio" name="gender" value="male" checked>М</label><br>
+                <label><input type="radio" name="gender" value="female">Ж</label><br>
+                <label><input type="radio" name="gender" checked="checked" value="other">?</label><br>
+                <!-- Список в котором может быть выбран один элемент -->
+                <select name="cars">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat" selected>Fiat</option>
+                    <option value="audi">Audi</option>
+                </select>
+                <!--Список со множественным выбором-->
+                <select multiple="multiple" name="services">
+                    <option value="1">Коробка автомат</option>
+                    <option value="2">Кондиционер</option>
+                    <option value="3" selected>Комфортабельный</option>
+                </select><br>
+                Пароль:<br>
+                <!-- Поле для ввода пароля -->
+                <input type="password" name="psw"><br>
+                <!-- Многострочное поле ввода -->
+                <textarea name="message" rows="10" cols="30"></textarea><br>
+                <!-- Флажок, основное событие onclick -->
+                <label><input type="checkbox" name="vehicle1" value="Bike">Беру мотоцикл</label><br>
+                <label><input type="checkbox" name="vehicle2" value="Car">Беру автомобиль</label><br>
+                <input type="text" name="onlyread" value ="Можно только читать" readonly><br>
+                <input type="text" name="disabled" value ="Элемент не доступен" disabled><br>
+                <!-- Данные сохраняемые вместе с формой но невидимые пользователю -->
+                <input type="hidden" name="hidden1" value="">
+                <!-- Кнопка для передачи данных формы -->
+                <input type="submit" value="Отправить форму">
+                <!-- Кнопка очищающая значения формы -->
+                <input type="reset" value="Сбросить значения">
+                <!--Кнопка, основное событие onclick-->
+                <input type="button" name="button1" value="Кнопка">
+                <br><br>
+            </form> 
+            <aside>
+                <div><a href="../content.html" class="button-small">Перейти к содержанию</a></div>
+            </aside>
+        </div>
+    <footer>
+        <p>Нижний Новгород, <time datetime="2017-04-18 13:00">2017</time></p>
+</footer>
+</body>
+</html>
